@@ -1,0 +1,43 @@
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include "lib/imgui.h"
+#include "lib/imgui_impl_glfw.h"
+#include "lib/imgui_impl_opengl3.h"
+
+#include "window.h"
+#include "input.h"
+#include "vector.h"
+#include "goop.h"
+
+#include <iostream>
+
+#define WIDTH 800
+#define HEIGHT 600
+
+int main() {
+	GLFWwindow* window = initGLFW(WIDTH, HEIGHT, "Glug");
+
+	if (window == NULL)
+	{
+		glfwTerminate();
+		return -1;
+	}
+
+	initWindow(window, WIDTH, HEIGHT);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		return -1;
+	}
+
+	while (!glfwWindowShouldClose(window))
+	{
+		processInput(window);
+		updateWindow(window);
+	}
+
+	shutdownWindow(window);
+
+	return 0;
+}
