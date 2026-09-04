@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -140,7 +140,9 @@
     <ClCompile Include="src\lib\imgui_widgets.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\model.cpp" />
     <ClCompile Include="src\planer.cpp" />
+    <ClCompile Include="src\render.cpp" />
     <ClCompile Include="src\vector.cpp" />
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>
@@ -157,6 +159,8 @@
     <ClInclude Include="src\lib\imstb_textedit.h" />
     <ClInclude Include="src\lib\imstb_truetype.h" />
     <ClInclude Include="src\input.h" />
+    <ClInclude Include="src\model.h" />
+    <ClInclude Include="src\render.h" />
     <ClInclude Include="src\vector.h" />
     <ClInclude Include="src\window.h" />
   </ItemGroup>

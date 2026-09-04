@@ -7,8 +7,8 @@
 
 #include "window.h"
 #include "input.h"
-#include "vector.h"
 #include "goop.h"
+#include "render.h"
 
 #include <iostream>
 
@@ -16,6 +16,9 @@
 #define HEIGHT 600
 
 int main() {
+	Goop goop;
+	Goop goop2;
+
 	GLFWwindow* window = initGLFW(WIDTH, HEIGHT, "Glug");
 
 	if (window == NULL)
@@ -26,15 +29,18 @@ int main() {
 
 	initWindow(window, WIDTH, HEIGHT);
 
+	// Load OpenGL function addresses
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		return -1;
 	}
 
+	// Main loop
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
 		updateWindow(window);
+		renderEntities();
 	}
 
 	shutdownWindow(window);
