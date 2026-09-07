@@ -11,9 +11,7 @@ std::queue<unsigned int> recycleIndex;
 unsigned int nextIndex = 0;
 
 Entity::Entity() {
-	std::cout << "Creating entity..." << std::endl;
-	
-	this->model = new Model(this);
+	this->model = new Model();
 
 	// Use recyclable indices when there is one
 	if (recycleIndex.size() < 1) {

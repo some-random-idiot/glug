@@ -1,15 +1,14 @@
 #pragma once
 
-#define MAX_UINT16 65536
+#include <string>
 
-class Entity;
+#define MAX_UINT16 65536
 
 class Model {
 	private:
-		Entity* boundEnt;  // Model must be bound to an entity
+		// Models initialized without a model data starts as a cube by default
+		std::string path = "cube";
 		float vertices[MAX_UINT16] = {
-			// Models initialized without a model data starts as a cube by default
-
 			// Front vertices
 			-0.5f, 0.5f, -0.5f,
 			0.5f, 0.5f, -0.5,
@@ -24,7 +23,9 @@ class Model {
 		};
 
 	public:
-		Model(Entity* ent);
+		Model();
+
+		Model(std::string path);
 
 		void Draw();
 };

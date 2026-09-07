@@ -1,16 +1,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 #include "lib/imgui.h"
 #include "lib/imgui_impl_glfw.h"
 #include "lib/imgui_impl_opengl3.h"
-
-#include "window.h"
-#include "input.h"
 #include "goop.h"
+#include "input.h"
 #include "render.h"
-
-#include <iostream>
+#include "window.h"
 
 #define WIDTH 800
 #define HEIGHT 600
