@@ -6,8 +6,8 @@
 
 class Model {
 	private:
-		// Models initialized without a model data starts as a cube by default
-		std::string path = "cube";
+		// Models initialized without a model file starts as a cube by default
+		std::string path = "cube";  // Also used as ID
 		float vertices[MAX_UINT16] = {
 			// Front vertices
 			-0.5f, 0.5f, -0.5f,
@@ -26,6 +26,4 @@ class Model {
 		Model();
 
 		Model(std::string path);
-
-		void Draw();
 };
