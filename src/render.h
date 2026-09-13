@@ -1,4 +1,4 @@
 #pragma once
 
-void initRenderer;
+void initRenderer();
 unsigned int allocateStaticVBO(float vertices[]);

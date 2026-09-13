@@ -6,7 +6,7 @@
 #include <map>
 
 std::map<std::string, Model*> modelRegistry;
-std::map<std::string, float*> modelIndexRegistry;
+std::map<std::string, float*> modelVBOIndexRegistry;
 
 bool registerModel(std::string path, Model* model) {
 	if (modelRegistry.find(path) == modelRegistry.end()) {
@@ -21,7 +21,7 @@ bool registerModel(std::string path, Model* model) {
 
 void cacheModel(std::string path, float vertices[]) {
 	unsigned int index = allocateStaticVBO(vertices);
-	modelIndexRegistry[path] = vertices;
+	modelVBOIndexRegistry[path] = vertices;
 }
 
 Model::Model() {

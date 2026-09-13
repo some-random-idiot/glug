@@ -45,7 +45,7 @@ Vector3 Entity::GetPosition() {
 }
 
 void Entity::DrawModel() {
-	this->model->Draw();
+	// TODO: implement
 }
 
 void Entity::Remove() {

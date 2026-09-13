@@ -117,4 +117,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shader\generic.vert" />
+    <None Include="src\shader\generic.frag" />
+  </ItemGroup>
 </Project>

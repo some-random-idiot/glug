@@ -1,10 +1,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <iostream>
 
 #include "lib/imgui.h"
 #include "lib/imgui_impl_glfw.h"
 #include "lib/imgui_impl_opengl3.h"
+
 #include "goop.h"
 #include "input.h"
 #include "render.h"
@@ -14,9 +16,6 @@
 #define HEIGHT 600
 
 int main() {
-	Goop goop;
-	Goop goop2;
-
 	GLFWwindow* window = initGLFW(WIDTH, HEIGHT, "Glug");
 
 	if (window == NULL)
@@ -33,12 +32,13 @@ int main() {
 		return -1;
 	}
 
+	initRenderer();
+
 	// Main loop
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
 		updateWindow(window);
-		renderEntities();
 	}
 
 	shutdownWindow(window);
