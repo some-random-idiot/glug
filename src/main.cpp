@@ -25,14 +25,11 @@ int main() {
 	}
 
 	initWindow(window, WIDTH, HEIGHT);
+	int result = initRenderer();
 
-	// Load OpenGL function addresses
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		return -1;
+	if (result == -1) {
+		return result;
 	}
-
-	initRenderer();
 
 	// Main loop
 	while (!glfwWindowShouldClose(window))

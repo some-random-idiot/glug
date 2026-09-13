@@ -59,7 +59,13 @@ void compileShader(std::string path) {
 	}
 }
 
-void initRenderer() {
+int initRenderer() {
+	// Load OpenGL function addresses
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		return -1;
+	}
+
 	// Buffers
 	glGenBuffers(1, &staticVBO);
 
