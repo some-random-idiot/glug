@@ -1,13 +1,19 @@
+// Shader paths are relative to the shader folder. Keep this in mind when adding shaders to the project.
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <map>
 #include <sstream>
 #include <string>
+#include <vector>
 
 namespace fs = std::filesystem;
+
+const std::string ROOT_SHADER_PATH = "shader/";
 
 unsigned int staticVBO;
 unsigned int staticVBOIndex = 0;
@@ -21,18 +27,42 @@ unsigned int allocateStaticVBO(float vertices[]) {
 	return staticVBOIndex;
 }
 
-std::map<std::string, unsigned int> vertShaderRegistry;
-std::map<std::string, unsigned int> fragShaderRegistry;
-
 void initShaders() {
-
+	
 }
 
-void compileShader(std::string path) {
-	fs::path pathObj(path);
+std::map<std::string, unsigned int> shaderProgramRegistry;
+
+void linkShaderProgram(std::string name, std::vector<std::string> shaderPaths) {
+	size_t pathCount = shaderPaths.size();
+
+	if (pathCount == 0) {
+		std::cout << "Shader program creation failed: no paths were provided." << std::endl;
+		return;
+	}
+
+	std::vector<unsigned int> compiledShaders;
+
+	for (std::string path : shaderPaths) {
+		compiledShaders.push_back(compileShader(path));
+	}
+
+	unsigned int shaderProgram;
+
+	for (unsigned int shader : compiledShaders) {
+		glAttachShader(shaderProgram, shader);
+	}
+
+	glLinkProgram(shaderProgram);
+
+	shaderProgramRegistry[name] = shaderProgram;
+}
+
+unsigned int compileShader(std::string shaderPath) {
+	fs::path pathObj(ROOT_SHADER_PATH + shaderPath);
 	fs::path extension = pathObj.extension();
 
-	std::ifstream fileStream(path);
+	std::ifstream fileStream(shaderPath);
 	std::stringstream stringStream;
 
 	stringStream << fileStream.rdbuf();
@@ -44,19 +74,26 @@ void compileShader(std::string path) {
 	if (extension == ".vert") {
 		shader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(shader, 1, &shaderSrcPtr, NULL);
-
-		vertShaderRegistry[path] = shader;
-
-		glCompileShader(shader);
 	}
 	if (extension == ".frag") {
 		shader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(shader, 1, &shaderSrcPtr, NULL);
-
-		fragShaderRegistry[path] = shader;
-
-		glCompileShader(shader);
 	}
+
+	glCompileShader(shader);
+
+	// Error logging
+	int  success;
+	char infoLog[512];
+
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(shader, 512, NULL, infoLog);
+		std::cout << "Failed to compile a shader:\n" << infoLog << std::endl;
+	}
+
+	return shader;
 }
 
 int initRenderer() {
@@ -71,4 +108,6 @@ int initRenderer() {
 
 	// Shaders
 	initShaders();
+
+	return 0;
 }

@@ -24,8 +24,8 @@ int main() {
 	}
 
 	initWindow(window, WIDTH, HEIGHT);
-	int result = initRenderer();
 
+	int result = initRenderer();
 	if (result == -1) {
 		return result;
 	}
